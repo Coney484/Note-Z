@@ -2,6 +2,8 @@ plugins {
     id 'com.android.application'
     id 'org.jetbrains.kotlin.android'
     id 'kotlin-kapt'
+    id 'androidx.navigation.safeargs.kotlin'
+
 }
 
 android {
@@ -25,11 +27,11 @@ android {
         }
     }
     compileOptions {
-        sourceCompatibility JavaVersion.VERSION_1_8
-        targetCompatibility JavaVersion.VERSION_1_8
+        sourceCompatibility JavaVersion.VERSION_17
+        targetCompatibility JavaVersion.VERSION_17
     }
     kotlinOptions {
-        jvmTarget = '1.8'
+        jvmTarget = '17'
     }
 }
 
@@ -48,16 +50,14 @@ dependencies {
     implementation "androidx.navigation:navigation-ui-ktx:2.5.3"
 
     //Room Database
-    implementation "androidx.room:room-runtime:2.5.1"
-    kapt "androidx.room:room-compiler:2.5.1"
-    implementation "androidx.room:room=ktx:2.5.1"
-    androidTestImplementation "androidx.room:room-testing:2.5.1"
+    def room_version = "2.5.1"
+    implementation "androidx.room:room-runtime:$room_version"
+    annotationProcessor "androidx.room:room-compiler:$room_version"
 
     //Lifecycle Component
-    def lifecycle_component_version = "2.6.1"
-    implementation "androidx.lifecycle:lifecycle-extensions:$lifecycle_component_version"
-    implementation "androidx.lifecycle:lifecycle-common-java8:$lifecycle_component_version"
-    implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycle_component_version"
+    implementation "androidx.lifecycle:lifecycle-extensions:2.2.0"
+    implementation "androidx.lifecycle:lifecycle-common-java8:2.6.1"
+    implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:2.6.1"
     implementation 'androidx.activity:activity-ktx:1.7.2'
 
     //Kotlin Components
