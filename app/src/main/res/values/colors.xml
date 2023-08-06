@@ -2,4 +2,14 @@
 <resources>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+    <color name="my_light_action_bar">#CBC3E3</color>
+    <color name="transparent">#00FFFFFF</color>
+
+    <color name="blue">#1B98F5</color>
+    <color name="lightGray">#D3D3D3</color>
+    <color name="darkGray">#242B2E</color>
+    <color name="red">#E21717</color>
+    <color name="yellow">#EDC126</color>
+    <color name="green">#00D84A</color>
+
 </resources>
