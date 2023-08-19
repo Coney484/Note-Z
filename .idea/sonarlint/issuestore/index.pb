@@ -1,9 +1,5 @@
 
-<
-build.gradle,f\0\f07866736216be0ee2aba49e392191aeae700a35
-@
-app/build.gradle,f\4\f4a01d6a4fcb971362ec00a83903fd3902f52164
-z
-Japp/src/main/java/com/example/note_z/ui/fragments/update/UpdateFragment.kt,d\c\dccbf52b7e3d155073b8f91001eee8646705ecae
-t
-Dapp/src/main/java/com/example/note_z/ui/fragments/add/AddFragment.kt,0\0\004892174f74017b7fb0fa8020965b269b2b199b
+d
+4app/src/main/java/com/example/note_z/MainActivity.kt,3\8\38706c618787dedf967e97865bccaf36406fdd4d
+P
+ app/src/main/AndroidManifest.xml,8\c\8c55c3ccc257e5907959013f99656e4c8ec3903e
