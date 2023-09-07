@@ -13,6 +13,7 @@ import com.example.note_z.R
 import com.example.note_z.data.Priority
 import com.example.note_z.data.TodoData
 import com.example.note_z.databinding.RowLayoutBinding
+import com.example.note_z.ui.fragments.list.ListFragmentDirections
 
 class NotesAdapter : RecyclerView.Adapter<NotesAdapter.NotesViewHolder>() {
 
@@ -42,16 +43,17 @@ class NotesAdapter : RecyclerView.Adapter<NotesAdapter.NotesViewHolder>() {
     }
 
     override fun onBindViewHolder(holder: NotesViewHolder, position: Int) {
-        holder.bind(asyncListDiffer.currentList[position], holder.itemView, holder.itemView.context)
+        holder.bind(asyncListDiffer.currentList[position], holder.itemView, holder.itemView.context, position)
     }
 
     inner class NotesViewHolder(private val binding: RowLayoutBinding) :
         RecyclerView.ViewHolder(binding.root) {
-        fun bind(todoData: TodoData, view: View, context: Context) {
+        fun bind(todoData: TodoData, view: View, context: Context, pos: Int) {
             binding.tvTitle.text = todoData.title
             binding.tvDesc.text = todoData.description
             binding.rowBackground.setOnClickListener {
-                view.findNavController().navigate(R.id.action_listFragment_to_updateFragment)
+                val action = ListFragmentDirections.actionListFragmentToUpdateFragment(todoData)
+                view.findNavController().navigate(action)
             }
             when (todoData.priority) {
                 Priority.HIGH -> binding.priorityIndicator.setCardBackgroundColor(
