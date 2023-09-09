@@ -27,7 +27,7 @@ class NotesAdapter : RecyclerView.Adapter<NotesAdapter.NotesViewHolder>() {
         }
     }
 
-    private val asyncListDiffer = AsyncListDiffer(this, diffCallback)
+     val asyncListDiffer = AsyncListDiffer(this, diffCallback)
 
     fun setData(todoData: List<TodoData>) {
         asyncListDiffer.submitList(todoData)

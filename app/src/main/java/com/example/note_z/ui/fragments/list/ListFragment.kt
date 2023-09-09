@@ -12,12 +12,15 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.viewModels
+import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.example.note_z.R
 import com.example.note_z.adapters.NotesAdapter
 import com.example.note_z.databinding.FragmentListBinding
 import com.example.note_z.viewmodel.SharedViewModel
 import com.example.note_z.viewmodel.TodoViewModel
+import com.google.android.material.snackbar.Snackbar
 
 class ListFragment : Fragment() {
 
@@ -107,6 +110,28 @@ class ListFragment : Fragment() {
     private fun setupAdapter() {
         binding.recyclerView.adapter = adapter
         binding.recyclerView.layoutManager = LinearLayoutManager(requireContext())
+        swipeToDelete(binding.recyclerView)
+    }
+
+    private fun swipeToDelete(recyclerView: RecyclerView) {
+        val swipeToDeleteCallBack = object : SwipeToDelete() {
+            override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
+                val itemToDelete = adapter.asyncListDiffer.currentList[viewHolder.adapterPosition]
+                mViewModel.deleteData(itemToDelete)
+                view?.let {
+                    Snackbar.make(it, "Note Deleted", Snackbar.LENGTH_LONG).apply {
+                        setAction("Undo") {
+                            mViewModel.insertData(itemToDelete)
+                        }
+                        show()
+                    }
+                }
+
+            }
+        }
+
+        val itemTouchHelper = ItemTouchHelper(swipeToDeleteCallBack)
+        itemTouchHelper.attachToRecyclerView(recyclerView)
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
