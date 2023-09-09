@@ -1,8 +1,13 @@
 package com.example.note_z.data
 
+import android.app.DownloadManager.Query
 import androidx.lifecycle.LiveData
 
 class TodoRepository(private val todoDao: TodoDao) {
+
+    val sortByHighPriority: LiveData<List<TodoData>> = todoDao.sortByHigherPriority()
+    val sortByLowPriority: LiveData<List<TodoData>> = todoDao.sortByLowPriority()
+    val sortByMediumPriority: LiveData<List<TodoData>> = todoDao.sortByMediumPriority()
 
     val getAllData: LiveData<List<TodoData>> = todoDao.getAllData()
 
@@ -20,5 +25,9 @@ class TodoRepository(private val todoDao: TodoDao) {
 
     suspend fun deleteAllData() {
         todoDao.deleteAllData()
+    }
+
+    fun searchNotes(searchQuery: String): LiveData<List<TodoData>> {
+        return todoDao.searchNote(searchQuery)
     }
 }

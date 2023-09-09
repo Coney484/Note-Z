@@ -14,11 +14,15 @@ import com.example.note_z.data.TodoData
 
 class SharedViewModel(application: Application) : AndroidViewModel(application) {
 
-    val emptyNotesLiveData : MutableLiveData<Boolean> = MutableLiveData()
+
+    /** =============================== List Fragment========================= */
+    val emptyNotesLiveData: MutableLiveData<Boolean> = MutableLiveData(false)
 
     fun checkIfNotesExistOrNot(todoData: List<TodoData>) {
         emptyNotesLiveData.postValue(todoData.isEmpty())
     }
+
+    /**  =============================== Update  Fragment========================= */
 
     val listener: AdapterView.OnItemSelectedListener = object :
         AdapterView.OnItemSelectedListener {

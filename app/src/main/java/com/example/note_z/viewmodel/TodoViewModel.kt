@@ -3,6 +3,7 @@ package com.example.note_z.viewmodel
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
+import androidx.lifecycle.LiveDataScope
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.note_z.data.TodoData
@@ -16,11 +17,17 @@ class TodoViewModel(application: Application) : AndroidViewModel(application) {
     private val todoDao = TodoDatabase.getDatabase(application).todoDao()
     private val repo: TodoRepository
 
+    val sortByHighPriority: LiveData<List<TodoData>>
+    val sortByLowPriority: LiveData<List<TodoData>>
+    val sortByMediumPriority: LiveData<List<TodoData>>
     val getAllData: LiveData<List<TodoData>>
 
     init {
         repo = TodoRepository(todoDao)
         getAllData = repo.getAllData
+        sortByHighPriority = repo.sortByHighPriority
+        sortByLowPriority = repo.sortByLowPriority
+        sortByMediumPriority = repo.sortByMediumPriority
     }
 
     fun insertData(todoData: TodoData) {
@@ -42,9 +49,14 @@ class TodoViewModel(application: Application) : AndroidViewModel(application) {
         }
     }
 
-    fun deleteAllData(){
-        viewModelScope.launch(Dispatchers.IO){
+    fun deleteAllData() {
+        viewModelScope.launch(Dispatchers.IO) {
             repo.deleteAllData()
         }
+    }
+
+
+    fun searchNotes(searchQuery: String): LiveData<List<TodoData>> {
+        return repo.searchNotes(searchQuery)
     }
 }
