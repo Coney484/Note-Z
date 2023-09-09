@@ -63,9 +63,7 @@ class SharedViewModel(application: Application) : AndroidViewModel(application) 
 
 
     fun validateData(noteTitle: String, noteDescription: String): Boolean {
-        return if (TextUtils.isEmpty(noteTitle) || TextUtils.isEmpty(noteDescription)) {
-            false
-        } else !(noteTitle.isEmpty() || noteDescription.isEmpty())
+        return !(noteTitle.isEmpty() || noteDescription.isEmpty())
     }
 
     fun parsePriority(notePriority: String): Priority {

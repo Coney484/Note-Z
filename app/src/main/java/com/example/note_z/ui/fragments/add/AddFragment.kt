@@ -10,8 +10,12 @@ import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.core.view.MenuHost
+import androidx.core.view.MenuProvider
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.LifecycleService
 import androidx.navigation.fragment.findNavController
 import com.example.note_z.R
 import com.example.note_z.data.Priority
@@ -35,24 +39,35 @@ class AddFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        setHasOptionsMenu(true)
+        setupOptionsMenu()
     }
 
-    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
-        inflater.inflate(R.menu.add_fragment_menu, menu)
+    private fun setupOptionsMenu() {
+        val menuHost: MenuHost = requireActivity()
+        menuHost.addMenuProvider(object : MenuProvider {
+            override fun onCreateMenu(menu: Menu, menuInflater: MenuInflater) {
+                menuInflater.inflate(R.menu.add_fragment_menu, menu)
+            }
+
+            override fun onMenuItemSelected(menuItem: MenuItem): Boolean {
+                if (menuItem.itemId == R.id.menu_add) {
+                    insertDataToDb()
+                } else if(menuItem.itemId == android.R.id.home){
+                    requireActivity().onBackPressed()
+
+                }
+
+                return true
+            }
+
+        }, viewLifecycleOwner, Lifecycle.State.RESUMED)
     }
 
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        if (item.itemId == R.id.menu_add) {
-            insertDataToDb()
-        }
-        return super.onOptionsItemSelected(item)
-    }
 
     private fun insertDataToDb() {
-        var noteTitle = binding.etTitle.text.toString()
-        var notePriority = binding.spinner.selectedItem.toString()
-        var noteDescription = binding.etMultiLine.text.toString()
+        val noteTitle = binding.etTitle.text.toString()
+        val notePriority = binding.spinner.selectedItem.toString()
+        val noteDescription = binding.etMultiLine.text.toString()
 
         val isValid = validateData(noteTitle, noteDescription)
         if (isValid) {
