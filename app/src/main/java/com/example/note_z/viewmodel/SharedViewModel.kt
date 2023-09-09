@@ -1,4 +1,4 @@
-package com.example.note_z.ui.fragments
+package com.example.note_z.viewmodel
 
 import android.app.Application
 import android.text.TextUtils

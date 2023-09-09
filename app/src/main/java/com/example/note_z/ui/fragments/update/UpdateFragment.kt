@@ -15,11 +15,9 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.example.note_z.R
-import com.example.note_z.data.Priority
 import com.example.note_z.data.TodoData
-import com.example.note_z.databinding.FragmentListBinding
 import com.example.note_z.databinding.FragmentUpdateBinding
-import com.example.note_z.ui.fragments.SharedViewModel
+import com.example.note_z.viewmodel.SharedViewModel
 import com.example.note_z.viewmodel.TodoViewModel
 
 class UpdateFragment : Fragment() {

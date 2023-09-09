@@ -12,12 +12,11 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.viewModels
-import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.note_z.R
 import com.example.note_z.adapters.NotesAdapter
 import com.example.note_z.databinding.FragmentListBinding
-import com.example.note_z.ui.fragments.SharedViewModel
+import com.example.note_z.viewmodel.SharedViewModel
 import com.example.note_z.viewmodel.TodoViewModel
 
 class ListFragment : Fragment() {
@@ -115,8 +114,6 @@ class ListFragment : Fragment() {
     }
 
     private fun listeners() {
-        binding.floatingActionButton.setOnClickListener {
-            findNavController().navigate(R.id.addFragment)
-        }
     }
+
 }

@@ -5,12 +5,15 @@
 
     <data>
 
+        <variable
+            name="mSharedViewModel"
+            type="com.example.note_z.viewmodel.SharedViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/clRoot"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:id="@+id/clRoot"
         tools:context=".ui.fragments.list.ListFragment">
 
 
@@ -25,6 +28,7 @@
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:id="@+id/floatingActionButton"
+            android.navigateToAddFragment="@{true}"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="24dp"
@@ -54,6 +58,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:alpha="0.5"
+            android:gravity="center|center_horizontal"
             android:text="@string/no_data"
             android:textSize="16sp"
             android:visibility="invisible"
