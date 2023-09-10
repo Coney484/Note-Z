@@ -9,11 +9,11 @@ plugins {
 
 
 android {
-    namespace 'com.example.note_z'
+    namespace 'com.rohan.note_z'
     compileSdk 33
 
     defaultConfig {
-        applicationId "com.example.note_z"
+        applicationId "com.rohan.note_z"
         minSdk 26
         targetSdk 33
         versionCode 1
