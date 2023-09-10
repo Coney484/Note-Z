@@ -78,6 +78,8 @@ class ListFragment : Fragment(), SearchView.OnQueryTextListener {
                 val searchView = search.actionView as? SearchView
                 searchView?.isSubmitButtonEnabled = true
                 searchView?.setOnQueryTextListener(this@ListFragment)
+                searchView?.setQuery("", false)
+                searchView?.clearFocus()
 
                 toggleMenuItem = menu.findItem(R.id.menu_toggle)
             }
@@ -211,6 +213,9 @@ class ListFragment : Fragment(), SearchView.OnQueryTextListener {
     override fun onQueryTextChange(searchQuery: String?): Boolean {
         if (!searchQuery.isNullOrEmpty()) {
             searchNotes(searchQuery)
+        }
+        else {
+            mViewModel.getAllData.value?.let { adapter.setData(it) }
         }
 
         return true
