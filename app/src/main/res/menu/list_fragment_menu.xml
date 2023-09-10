@@ -9,6 +9,14 @@
         android:title="@string/search"
         app:actionViewClass="androidx.appcompat.widget.SearchView"
         app:showAsAction="ifRoom" />
+
+    <item
+        android:id="@+id/menu_toggle"
+        android:icon="@drawable/ic_grid_view_icon"
+        android:visible="true"
+        android:title=""
+        app:showAsAction="ifRoom" />
+
     <group android:checkableBehavior="single">
 
 

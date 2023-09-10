@@ -9,15 +9,14 @@ import android.view.MenuInflater
 import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
-import android.widget.GridLayout
 import androidx.appcompat.widget.SearchView
 import android.widget.Toast
+import androidx.core.content.ContextCompat
 import androidx.core.view.MenuHost
 import androidx.core.view.MenuProvider
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
-import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -43,6 +42,12 @@ class ListFragment : Fragment(), SearchView.OnQueryTextListener {
     private val adapter: NotesAdapter by lazy {
         NotesAdapter()
     }
+
+    private var toggleMenuItem: MenuItem? = null
+
+
+    private var isStaggeredLayoutManager: Boolean = true
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -73,6 +78,8 @@ class ListFragment : Fragment(), SearchView.OnQueryTextListener {
                 val searchView = search.actionView as? SearchView
                 searchView?.isSubmitButtonEnabled = true
                 searchView?.setOnQueryTextListener(this@ListFragment)
+
+                toggleMenuItem = menu.findItem(R.id.menu_toggle)
             }
 
             override fun onMenuItemSelected(menuItem: MenuItem): Boolean {
@@ -96,12 +103,36 @@ class ListFragment : Fragment(), SearchView.OnQueryTextListener {
                         adapter.setData(it)
                     }
 
+                    R.id.menu_toggle -> {
+                        toggleLayoutManager()
+                    }
+
                     android.R.id.home -> requireActivity().onBackPressed()
                 }
                 return true
             }
 
         }, viewLifecycleOwner, Lifecycle.State.RESUMED)
+    }
+
+    private fun toggleLayoutManager() {
+        isStaggeredLayoutManager = !isStaggeredLayoutManager
+        val layoutManager = if (isStaggeredLayoutManager) {
+            StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL)
+        } else {
+            LinearLayoutManager(requireContext())
+        }
+        binding.recyclerView.layoutManager = layoutManager
+
+        // Toggle the icon of the toggle button based on the current layout manager
+        if (toggleMenuItem != null) {
+            toggleMenuItem!!.icon = if (isStaggeredLayoutManager) {
+                ContextCompat.getDrawable(requireContext(), R.drawable.ic_grid_view_icon)
+            } else {
+                ContextCompat.getDrawable(requireContext(), R.drawable.ic_linear_view_icon)
+            }
+        }
+
     }
 
     private fun setupObserver() {
