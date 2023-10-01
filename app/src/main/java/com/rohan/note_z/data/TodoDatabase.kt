@@ -6,7 +6,7 @@ import androidx.room.Room
 import androidx.room.RoomDatabase
 import androidx.room.TypeConverters
 
-@Database(entities = [TodoData::class], version = 1, exportSchema = false)
+@Database(entities = [TodoData::class], version = 2, exportSchema = false)
 @TypeConverters(Converter::class)
 abstract class TodoDatabase : RoomDatabase() {
 
