@@ -13,3 +13,15 @@
 .externalNativeBuild
 .cxx
 local.properties
+# Ignore keystore files
+*.jks
+
+# Ignore public certificate files
+*.pem
+
+# Ignore additional .idea files
+/.idea/deploymentTargetSelector.xml
+/.idea/migrations.xml
+/.idea/other.xml
+/app/release/*.aab
+/.idea/gradle.xml
